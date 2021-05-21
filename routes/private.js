@@ -1,0 +1,20 @@
+const express = require('express')
+const router = express.Router()
+const { auth } = require('../middleware/auth')
+const { home, createPost, getAllPosts, getUserPost, deletePost, likePost, unlikePost, addFavourite, removeFavourite, getFavourites, updateProfile, uploadProfile, uploadImage } = require('../controller/private')
+
+router.route('/home').post(auth, home)
+router.route('/createpost').post(auth, createPost)
+router.route('/delete/:id').delete(auth, deletePost)
+router.route('/getallposts').post(auth, getAllPosts)
+router.route('/getuserpost').post(auth, getUserPost)
+router.route('/like/:id').put(auth, likePost)
+router.route('/unlike/:id').put(auth, unlikePost)
+router.route('/addfavourite/:id').put(auth, addFavourite)
+router.route('/removefavourite/:id').put(auth, removeFavourite)
+router.route('/getfavourites').post(auth, getFavourites)
+router.route('/updateprofile/:id').put(auth, updateProfile)
+router.route('/uploadprofile').put(auth, uploadProfile)
+router.route('/uploadimage').put(auth, uploadImage)
+
+module.exports = router
