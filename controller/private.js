@@ -212,7 +212,6 @@ exports.updateProfile = async (req, res) => {
 
 exports.uploadProfile = async (req, res) => {
     const url = req.body.url
-    console.log(url)
     try{
         const user = await User.findOneAndUpdate({ _id: req.user._id }, { url: url }, { new: true })
         res.json({ message: 'File Uploaded Successfully!' })
@@ -230,5 +229,23 @@ exports.uploadImage = async (req, res) => {
         res.json({ message: 'File Uploaded Successfully!' })
     } catch(err){
         res.json({ error: 'Error Occurred in Uploading!' })
+    }
+}
+
+exports.updatePost = async (req, res) => {
+    const id = req.params.id
+    const title = req.body.title
+    const content = req.body.content
+    try{
+        const post = await Post.findOneAndUpdate({ _id: id }, { title, content }, { new: true })
+        res.status(200).json({
+            success: true,
+            post
+        })
+    } catch(err){
+        res.status(500).json({
+            success: false.valueOf,
+            error: 'Internal Server Error'
+        })
     }
 }

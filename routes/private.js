@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { auth } = require('../middleware/auth')
-const { home, createPost, getAllPosts, getUserPost, deletePost, likePost, unlikePost, addFavourite, removeFavourite, getFavourites, updateProfile, uploadProfile, uploadImage } = require('../controller/private')
+const { home, createPost, getAllPosts, getUserPost, deletePost, likePost, unlikePost, addFavourite, removeFavourite, getFavourites, updateProfile, uploadProfile, uploadImage, updatePost } = require('../controller/private')
 
 router.route('/home').post(auth, home)
 router.route('/createpost').post(auth, createPost)
@@ -16,5 +16,6 @@ router.route('/getfavourites').post(auth, getFavourites)
 router.route('/updateprofile/:id').put(auth, updateProfile)
 router.route('/uploadprofile').put(auth, uploadProfile)
 router.route('/uploadimage').put(auth, uploadImage)
+router.route('/updatepost/:id').put(auth, updatePost)
 
 module.exports = router

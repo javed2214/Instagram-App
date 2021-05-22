@@ -1,32 +1,41 @@
-import axios from 'axios'
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
+import { useLocation } from "react-router-dom";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import AuthContext from '../context/AuthContext'
 import { storage } from "./firebase";
+import axios from 'axios'
 
-function AddPost() {
+const EditPost = () => {
 
     const { getUser, user } = useContext(AuthContext)
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
+    const [id, setId] = useState('')
 
     const [file, setFile] = useState(null);
     const [url, setURL] = useState(user.url);
 
+
+    const location = useLocation();
+
     useEffect(() => {
-        getUser()
-    }, [])
+        console.log(location.state.post)
+        setTitle(location.state.post.title)
+        setContent(location.state.post.content)
+        setId(location.state.post._id)
+        console.log(id)
+    }, [location])
 
-
-    const addPost = async (e) => {
-        e.preventDefault()
+    const updatePost = async (id) => {
+        // e.preventDefault()
         const post = {
             title, content
         }
-        const resp = await axios.post('/private/createpost', post)
+        // console.log(title, content)
+        const resp = await axios.put(`/private/updatepost/${id}`, post)
         if(resp.data.success){
-            NotificationManager.success('Post Added Successfully!', '', 1800);
+            NotificationManager.success('Post Updated Successfully!', '', 1800);
         } else{
             NotificationManager.error(resp.data.error, '', 1800)
         }
@@ -49,29 +58,18 @@ function AddPost() {
     function handleChange(e) {
         setFile(e.target.files[0]);
     }
-    
-    function handleUpload(e) {
-    e.preventDefault();
-    }
 
-    return (
+    return(
         <div className="container center">
             <form>
                 <NotificationContainer />
-                <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} /><br /><br />
-                <textarea cols="30" rows="10" style={{ height: '320px', padding: '5px' }} placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)}></textarea><br /><br />
+                <input type="text" placeholder="Title" value={ title } onChange={(e) => setTitle(e.target.value)} /><br /><br />
+                <textarea cols="30" rows="10" style={{ height: '320px', padding: '5px' }} placeholder="Content" value={ content } onChange={(e) => setContent(e.target.value)}></textarea><br /><br />
                 <input type="file" className="btn" onChange={handleChange} /><br /><br />
-                <button disabled={!file} onClick={addPost} className="btn">Add Post</button>
             </form>
-            <br />
-            <div>
-                {/* <form onSubmit={handleUpload}>
-                    <input type="file" className="btn" onChange={handleChange} /><br /><br />
-                    <button className="btn red" disabled={!file}>Upload</button>
-                </form> */}
-            </div>
+            <button disabled={!file} onClick={() => updatePost(location.state.post._id)} className="btn">Update Post</button>
         </div>
     )
 }
 
-export default AddPost
+export default EditPost;

@@ -6,12 +6,15 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import './Home.css'
 import AuthContext from '../context/AuthContext';
+import { useHistory } from 'react-router'
+import EditPost from './EditPost'
 
 function Home() {
 
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true)
     const { getUser, user } = useContext(AuthContext)
+    const history = useHistory()
 
     const getAllPosts = async () => {
         const resp = await axios.post('/private/getallposts')
@@ -77,6 +80,13 @@ function Home() {
         getUser()
     }, [])
 
+    const editPost = (post) => {
+        history.push({
+            pathname: '/editpost',
+            state: { post: post }
+        })
+    }
+
     return (
         <div className="container center">
         <NotificationContainer />
@@ -98,7 +108,7 @@ function Home() {
                                 <div className="card-action">
                                     { post.likes.includes(user._id) ? <><i onClick={() => unlikePost(post._id)} className="material-icons left noselect" style={{ marginLeft: '0px', marginTop: '8px', cursor: 'pointer', color: 'red', outline: 'none' }}>favorite</i><span style={{ float: 'left', marginTop: '9px' }}>{post.likes.length}</span></> : <><i onClick={() => likePost(post._id)} className="material-icons left noselect" style={{ marginLeft: '0px', marginTop: '8px', cursor: 'pointer' }}>favorite_border</i><span style={{ float: 'left', marginTop: '9px', outline: 'none' }}>{post.likes.length}</span></> }
                                     { user.email === post.user.email ? <button onClick={() => deletePost(post._id)} className="waves-effect waves-light btn #ef5350 red lighten-1" style={{ fontSize: '12px', borderRadius: '100px' }}>Delete</button> : <button className="waves-effect waves-light btn #ef5350 red lighten-1 disabled" style={{ fontSize: '12px', borderRadius: '100px' }}>Delete</button> }
-                                    <Link style={{ float: 'right', marginTop: '8px', color: 'black', fontWeight: 'bold', marginRight: '0px' }} to='/editpost'><i className="material-icons left">edit</i></Link>
+                                    <span onClick={() => editPost(post)} style={{ float: 'right', marginTop: '8px', color: 'black', fontWeight: 'bold', marginRight: '0px', cursor: 'pointer' }}><i className="material-icons left">edit</i></span>
                                 </div>
                             </div>
                             </div>

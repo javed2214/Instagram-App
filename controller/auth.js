@@ -44,7 +44,7 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
     const { email, password } = req.body
     try{
-        if(!email || !password) return res.json({ message: 'Please fill all the Fields' })
+        if(!email || !password) return res.json({ error: 'Please fill all the Fields' })
         const { error } = validateLoginUser(req.body)
         if(error) return res.json({ error: error.details[0].message })
         var user = await User.findOne({ email })
