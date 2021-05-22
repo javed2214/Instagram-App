@@ -13,6 +13,7 @@ function Profile() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const [uploading, setUploading] = useState('')
 
     const [file, setFile] = useState(null);
     const [url, setURL] = useState(user.url);
@@ -39,6 +40,7 @@ function Profile() {
     }
     
     function handleUpload(e) {
+    setUploading('Uploading...')
     e.preventDefault();
     const uploadTask = storage.ref(`/images/${file.name}`).put(file);
     uploadTask.on("state_changed", console.log, console.error, () => {
@@ -50,6 +52,7 @@ function Profile() {
             setFile(null);
             setURL(url);
             axios.put('/private/uploadprofile', { url })
+            setUploading('')
         })
     })}
 
@@ -57,6 +60,7 @@ function Profile() {
         <div className="container center">
         <br /><br /><br />
             <NotificationContainer />
+    
             <img src={url} style={{ borderRadius: '50%' }} height='100px' width="100px" alt="Image Faild to Load" />
             <div className="center" style={{ fontSize: '16px' }}>
                 <b style={{ fontFamily: 'Roboto Slab' }}>Username :</b> {user.username} <br />
@@ -66,7 +70,8 @@ function Profile() {
             <div>
                 <form onSubmit={handleUpload}>
                     <input type="file" className="btn" onChange={handleChange} /><br /><br />
-                    <button className="btn red" disabled={!file}>Upload</button>
+                    <button className="btn red" disabled={!file}>Upload</button><br />
+                    {uploading}
                 </form>
             </div>
             <br />
