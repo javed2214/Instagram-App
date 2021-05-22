@@ -171,7 +171,7 @@ exports.getFavourites = async (req, res) => {
     const user = req.user
     const id = user._id
     try{
-        const posts = await  Post.find( { 'favourites': mongoose.Types.ObjectId(id) } );
+        const posts = await  Post.find( { 'favourites': mongoose.Types.ObjectId(id) } ).populate('user', 'username email')
         res.status(200).json({
             success: true,
             posts
