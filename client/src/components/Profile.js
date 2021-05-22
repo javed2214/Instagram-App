@@ -64,7 +64,8 @@ function Profile() {
             <img src={url} style={{ borderRadius: '50%' }} height='100px' width="100px" alt="Image Faild to Load" />
             <div className="center" style={{ fontSize: '16px' }}>
                 <b style={{ fontFamily: 'Roboto Slab' }}>Username :</b> {user.username} <br />
-                <b style={{ fontFamily: 'Roboto Slab' }}>Email ID :</b> {user.email}
+                <b style={{ fontFamily: 'Roboto Slab' }}>Email ID :</b> {user.email}<br />
+                <b style={{ fontFamily: 'Roboto Slab' }}>Followers :</b> {user.followers.length} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b style={{ fontFamily: 'Roboto Slab' }}>Following :</b> {user.following.length}<br />
             </div>
             <br />
             <div>

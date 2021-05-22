@@ -65,7 +65,7 @@ exports.deletePost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
     try{
-        const posts = await Post.find().populate('user', 'username email url')
+        const posts = await Post.find().populate('user', 'username email url followers following')
         res.status(200).json({
             success: true,
             posts
@@ -245,6 +245,42 @@ exports.updatePost = async (req, res) => {
     } catch(err){
         res.status(500).json({
             success: false.valueOf,
+            error: 'Internal Server Error'
+        })
+    }
+}
+
+exports.userFollow = async (req, res) => {
+    const id = req.params.id
+    try{
+        const user = await User.findByIdAndUpdate(req.user._id, {
+            $push: { following: id }
+        }, { new: true })
+        res.status(200).json({
+            success: true,
+            message: 'User Follwed!'
+        })
+    } catch(err){
+        res.status(500).json({
+            success: false,
+            error: 'Internal Server Error'
+        })
+    }
+}
+
+exports.userUnFollow = async (req, res) => {
+    const id = req.params.id
+    try{
+        const user = await User.findByIdAndUpdate(req.user._id, {
+            $pull: { following: id }
+        }, { new: true })
+        res.status(200).json({
+            success: true,
+            message: 'User Unfollowed!'
+        })
+    } catch(err){
+        res.status(500).json({
+            success: false,
             error: 'Internal Server Error'
         })
     }
