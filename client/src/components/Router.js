@@ -9,6 +9,7 @@ import Profile from './Profile'
 import MyPost from './MyPost'
 import Favourite from './Favourite'
 import EditPost from './EditPost'
+import UserProfile from './UserProfile'
 import AuthContext from '../context/AuthContext'
 
 const Router = () => {
@@ -31,6 +32,7 @@ const Router = () => {
                 { loggedIn === true && <Route exact path='/myposts' component={MyPost} /> }
                 { loggedIn === true && <Route exact path='/favourite' component={Favourite} /> }
                 { loggedIn === true && <Route exact path='/editpost' component={EditPost} /> }
+                { loggedIn === true && <Route exact path='/userprofile' component={UserProfile} /> }
                 { loggedIn === true ? <Redirect to='/' /> : <Redirect to='/login' /> }
                 
             </Switch>

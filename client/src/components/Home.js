@@ -87,6 +87,13 @@ function Home() {
         })
     }
 
+    const userProfile = (data) => {
+        history.push({
+            pathname: '/userprofile',
+            state: { user: data }
+        })
+    }
+
     return (
         <div className="container center">
         <NotificationContainer />
@@ -97,11 +104,11 @@ function Home() {
                     return(
                         <div key={post._id} className="row">
                             <div className="center">
-                            <div className="card">
-                                <span style={{ paddingTop: '8px', float: 'left', marginLeft: '17px', fontWeight: 'bolder', color: 'darkgoldenrod', fontFamily: 'KoHo' }}>@{post.user.username}</span>
+                            <div className="card #fbe9e7 #fffde7 yellow lighten-5">
+                                <span onClick={() => userProfile(post)} style={{ paddingTop: '8px', float: 'left', marginLeft: '17px', fontWeight: 'bolder', color: 'blue', fontFamily: 'KoHo', cursor: 'pointer' }}>@{post.user.username}</span>
                                 <br /><br />
-                                <img src={post.url} style={{ padding: '1px' }} height='225px' width="320px" alt="Image Faild to Load" />
-                                <div className="card-title" style={{ fontWeight: '', fontSize: '22px', paddingTop: '4px', fontFamily: 'Acme', marginRight: '20px' }}>{post.title}<span style={{ position: 'absolute', right: 0, top: 0 }}>{ post.favourites.includes(user._id) ? <span><i onClick={() => removeFavourite(post._id)} class="material-icons" style={{ cursor: 'pointer', color: 'green' }}>star</i></span> : <span><i onClick={() => addFavourite(post._id)} class="material-icons" style={{ cursor: 'pointer' }}>star_border</i></span> }</span></div>
+                                <img src={post.url} style={{ padding: '1px' }} height='225px' width="320px" alt="Image Faild to Load" /><br /><br />
+                                <div className="card-title center" style={{ fontWeight: '', fontSize: '22px', paddingTop: '4px', fontFamily: 'Acme', marginRight: '20px' }}>{post.title}<span style={{ position: 'absolute', right: 0, top: 0 }}>{ post.favourites.includes(user._id) ? <span><i onClick={() => removeFavourite(post._id)} class="material-icons" style={{ cursor: 'pointer', color: 'green' }}>star</i></span> : <span><i onClick={() => addFavourite(post._id)} class="material-icons" style={{ cursor: 'pointer' }}>star_border</i></span> }</span></div>
                                 <div className="card-content" style={{ fontFamily: 'Roboto', fontSize: '16px' }}>
                                     {post.content}
                                 </div>

@@ -65,7 +65,7 @@ exports.deletePost = async (req, res) => {
 
 exports.getAllPosts = async (req, res) => {
     try{
-        const posts = await Post.find().populate('user', 'username email')
+        const posts = await Post.find().populate('user', 'username email url')
         res.status(200).json({
             success: true,
             posts
