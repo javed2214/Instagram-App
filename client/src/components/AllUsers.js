@@ -6,17 +6,19 @@ import axios from 'axios'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import './Home.css'
+import Loader from './Loader'
 
 const AllUser = () => {
 
     const [users, setUsers] = useState([])
     const { getUser, user } = useContext(AuthContext)
     const history = useHistory()
+    const [loading, setLoading] = useState(true)
 
     const getAllUsers = async () => {
         const resp = await axios.post('/private/allusers')
-        // console.log(resp.data.users)
         setUsers(resp.data.users)
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -61,7 +63,7 @@ const AllUser = () => {
             <NotificationContainer />
             <table className="centered">
                 <tbody>
-                    { users.map((userProfile) => {
+                    { loading ? <center><br /><br /><Loader type='spokes' color= 'red' height= '20%' width= '20%' /></center> :  users.map((userProfile) => {
                         return(
                             user.email != userProfile.email && (
                                 <tr key={userProfile._id}>

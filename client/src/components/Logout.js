@@ -16,7 +16,7 @@ const Logout = () => {
     
     return(
         <>
-            <button style={{ marginRight: '15px', marginTop: '-3px', backgroundColor: '#660033' }} className="btn #1e88e5 blue darken-1" onClick={logOut}>Logout</button>
+            <button style={{ marginRight: '15px', marginTop: '-3px', backgroundColor: '#660033' }} className="btn waves-effect waves-light #1e88e5 blue darken-1" onClick={logOut}>Logout</button>
         </>
     )
 }

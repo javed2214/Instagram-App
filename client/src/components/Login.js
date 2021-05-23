@@ -47,7 +47,7 @@ function Login() {
                     <>
                         <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         <input type={hidden ? "password" : "text"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} /><i onClick={togglePassword} style={{ top: '36.5%', right: '15%', cursor: 'pointer' }} className="material-icons">remove_red_eye</i><br /><br />
-                        <button type="submit" className="btn blue">Login</button>
+                        <button type="submit" className="btn blue waves-effect waves-light">Login</button>
                     </>
                 }
             </form>
