@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { auth } = require('../middleware/auth')
-const { home, createPost, getAllPosts, getUserPost, deletePost, likePost, unlikePost, addFavourite, removeFavourite, getFavourites, updateProfile, uploadProfile, uploadImage, updatePost, userFollow, userUnFollow } = require('../controller/private')
+const { home, createPost, getAllPosts, getUserPost, deletePost, likePost, unlikePost, addFavourite, removeFavourite, getFavourites, updateProfile, uploadProfile, uploadImage, updatePost, userFollow, userUnFollow } = require('../controllers/private')
 
 router.route('/home').post(auth, home)
 router.route('/createpost').post(auth, createPost)

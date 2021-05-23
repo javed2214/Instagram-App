@@ -256,9 +256,15 @@ exports.userFollow = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.user._id, {
             $push: { following: id }
         }, { new: true })
+
+        const userProfile = await User.findByIdAndUpdate(id, {
+            $push: { followers: req.user._id }
+        }, { new: true })
+
         res.status(200).json({
             success: true,
-            message: 'User Follwed!'
+            message: 'User Follwed!',
+            userProfile
         })
     } catch(err){
         res.status(500).json({
@@ -274,9 +280,15 @@ exports.userUnFollow = async (req, res) => {
         const user = await User.findByIdAndUpdate(req.user._id, {
             $pull: { following: id }
         }, { new: true })
+
+        const userProfile = await User.findByIdAndUpdate(id, {
+            $pull: { followers: req.user._id }
+        }, { new: true })
+
         res.status(200).json({
             success: true,
-            message: 'User Unfollowed!'
+            message: 'User Unfollowed!',
+            userProfile
         })
     } catch(err){
         res.status(500).json({
