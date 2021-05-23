@@ -70,8 +70,8 @@ function Profile() {
             <br />
             <div>
                 <form onSubmit={handleUpload}>
-                    <input type="file" className="btn #009688 teal" onChange={handleChange} /><br /><br />
-                    <button className="btn red" disabled={!file}>Upload</button><br />
+                    <input type="file" className="btn #009688 teal waves-effect waves-light" onChange={handleChange} /><br /><br />
+                    <button className="btn red waves-effect waves-light" disabled={!file}>Upload</button><br />
                     {uploading}
                 </form>
             </div>
@@ -84,7 +84,7 @@ function Profile() {
                     <input type="password" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
                     <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} /><br />
                 </form>
-                <button onClick={() => updateData(user._id)} className="btn #4a148c purple darken-4">Update</button>
+                <button onClick={() => updateData(user._id)} className="btn waves-effect waves-light #4a148c purple darken-4">Update</button>
             </div>
         </div>
     )

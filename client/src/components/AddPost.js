@@ -27,23 +27,23 @@ function AddPost() {
         const resp = await axios.post('/private/createpost', post)
         if(resp.data.success){
             NotificationManager.success('Post Added Successfully!', '', 1800);
+            const uploadTask = storage.ref(`/images/${file.name}`).put(file);
+            uploadTask.on("state_changed", console.log, console.error, () => {
+                storage
+                .ref("images")
+                .child(file.name)
+                .getDownloadURL()
+                .then((url) => {
+                    setFile(null);
+                    setURL(url);
+                    axios.put('/private/uploadimage', { url, id: resp.data.post._id })
+                })
+            })
+            setTitle('')
+            setContent('')
         } else{
             NotificationManager.error(resp.data.error, '', 1800)
         }
-        const uploadTask = storage.ref(`/images/${file.name}`).put(file);
-        uploadTask.on("state_changed", console.log, console.error, () => {
-            storage
-            .ref("images")
-            .child(file.name)
-            .getDownloadURL()
-            .then((url) => {
-                setFile(null);
-                setURL(url);
-                axios.put('/private/uploadimage', { url, id: resp.data.post._id })
-            })
-        })
-        setTitle('')
-        setContent('')
     }
 
     function handleChange(e) {
@@ -62,7 +62,7 @@ function AddPost() {
                 <input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} /><br /><br />
                 <textarea cols="30" rows="10" style={{ height: '320px', padding: '5px' }} placeholder="Content" value={content} onChange={(e) => setContent(e.target.value)}></textarea><br /><br />
                 <input type="file" className="btn #009688 teal" onChange={handleChange} /><br /><br />
-                <button disabled={!file} onClick={addPost} className="btn">Add Post</button>
+                <button disabled={!file} onClick={addPost} className="btn waves-effect waves-light red">Add Post</button>
             </form>
             <br />
             <div>

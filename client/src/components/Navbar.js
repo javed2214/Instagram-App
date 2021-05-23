@@ -24,9 +24,10 @@ const Navbar = () => {
                                 <>  
                                     <li><Link to='/'>Home</Link></li>
                                     <li><Link to='/addpost'>Add Post</Link></li>
-                                    <li><Link to='/myposts'>My Post</Link></li>
-                                    <li><Link to='/favourite'>Favourite</Link></li>
-                                    <li><Link to='/profile'>Profile</Link></li>
+                                    <li><Link to='/allusers'>Users</Link></li>
+                                    <li><Link to='/favourite'>Favourites</Link></li>
+                                    <li><Link to='/profile'>Profile </Link></li>
+                                    {/* <li><Link to='/myposts'>My Post</Link></li> */}
                                     {/* <li style={{ float: 'right' }}></li> */}
                                 </>
                             }

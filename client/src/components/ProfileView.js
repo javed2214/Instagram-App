@@ -5,7 +5,7 @@ import axios from 'axios'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 
-function UserProfile() {
+function ProfileView() {
 
     const { getUser, user } = useContext(AuthContext)
     const [userProfile, setUserProfile] = useState('')
@@ -17,11 +17,11 @@ function UserProfile() {
     const location = useLocation();
 
     useEffect(() => {
-        setUserProfile(location.state.user.user)
-        setUsername(location.state.user.user.username)
-        setEmail(location.state.user.user.email)
-        setFollowers(location.state.user.user.followers.length)
-        setFollowing(location.state.user.user.following.length)
+        setUserProfile(location.state.user)
+        setUsername(location.state.user.username)
+        setEmail(location.state.user.email)
+        setFollowers(location.state.user.followers.length)
+        setFollowing(location.state.user.following.length)
     }, [location])
 
     // setTimeout(() => {
@@ -83,4 +83,4 @@ function UserProfile() {
     )
 }
 
-export default UserProfile
+export default ProfileView

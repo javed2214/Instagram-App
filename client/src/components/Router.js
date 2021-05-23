@@ -10,6 +10,8 @@ import MyPost from './MyPost'
 import Favourite from './Favourite'
 import EditPost from './EditPost'
 import UserProfile from './UserProfile'
+import ProfileView from './ProfileView'
+import AllUser from './AllUsers'
 import AuthContext from '../context/AuthContext'
 
 const Router = () => {
@@ -33,6 +35,8 @@ const Router = () => {
                 { loggedIn === true && <Route exact path='/favourite' component={Favourite} /> }
                 { loggedIn === true && <Route exact path='/editpost' component={EditPost} /> }
                 { loggedIn === true && <Route exact path='/userprofile' component={UserProfile} /> }
+                { loggedIn === true && <Route exact path='/profileview' component={ProfileView} /> }
+                { loggedIn === true && <Route exact path='/allusers' component={AllUser} /> }
                 { loggedIn === true ? <Redirect to='/' /> : <Redirect to='/login' /> }
                 
             </Switch>

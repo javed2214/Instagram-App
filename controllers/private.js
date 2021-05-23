@@ -309,3 +309,18 @@ exports.userUnFollow = async (req, res) => {
         })
     }
 }
+
+exports.getAllUsers = async (req, res) => {
+    try{
+        const users = await User.find()
+        res.json({
+            success: true,
+            users
+        })
+    } catch(err){
+        res.json({
+            success: false,
+            error: 'Internal Server Error'
+        })
+    }
+}
