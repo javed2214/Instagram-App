@@ -4,6 +4,7 @@ import { useHistory } from 'react-router'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import './Home.css'
+import Footer from './Footer'
 
 function Register() {
 
@@ -48,6 +49,7 @@ function Register() {
                 <input type={hidden ? "password" : "text"} placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /><i onClick={togglePassword} style={{ top: '36.5%', right: '15%', cursor: 'pointer' }} className="material-icons">remove_red_eye</i><br /><br />
                 <button type="submit" className="btn blue waves-effect waves-light">Register</button>
             </form>
+            <Footer />
         </div>
     )
 }

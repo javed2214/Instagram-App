@@ -6,6 +6,7 @@ import 'react-notifications/lib/notifications.css';
 import AuthContext from '../context/AuthContext';
 import Loader from './Loader'
 import './Home.css'
+import Footer from './Footer'
 
 function Login() {
 
@@ -51,6 +52,7 @@ function Login() {
                     </>
                 }
             </form>
+            <Footer />
         </div>
     )
 }

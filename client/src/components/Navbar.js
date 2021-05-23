@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import AuthContext from '../context/AuthContext'
 import Logout from '../components/Logout'
+import './Home.css'
 
 const Navbar = () => {
 
@@ -12,9 +13,10 @@ const Navbar = () => {
             <div className="navbar-fixed">
                 <nav className="#880e4f pink darken-4">
                     <div className="nav-wrapper">
+                        { loggedIn === false && <span style={{ marginLeft: '10px', fontFamily: 'Grand Hotel', fontSize: '28px', cursor: 'pointer' }} className="left">Instagram<span style={{ fontFamily: 'Grand Hotel', fontSize: '21px', cursor: 'pointer' }}>&nbsp; 2.0</span></span> }
                         <ul className="right">
                             {   loggedIn === false &&
-                                <>
+                                <>  
                                     <li><Link to='/register'>Register</Link></li>
                                     <li><Link to='/login'>Login</Link></li>
                                 </>
