@@ -5,6 +5,7 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import AuthContext from '../context/AuthContext';
 import Loader from './Loader'
+import './Home.css'
 
 function Login() {
 
@@ -39,7 +40,7 @@ function Login() {
 
     return (
         <div className="container center">
-            <h4><b>LOGIN</b></h4><br />
+            <h4 style={{ fontFamily: 'KoHo' }}><b className='#00695c teal-text text-darken-3'>LOGIN</b></h4><br />
             <NotificationContainer />
             <form onSubmit={loginUser}>
                 { loading ? <center><br /><br /><Loader type='spokes' color= 'red' height= '20%' width= '20%' /></center> :  

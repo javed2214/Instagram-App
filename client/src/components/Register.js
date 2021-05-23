@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useHistory } from 'react-router'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import './Home.css'
 
 function Register() {
 
@@ -38,7 +39,7 @@ function Register() {
 
     return (
         <div className="container center">
-            <h4><b>REGISTER</b></h4><br />
+            <h4 style={{ fontFamily: 'KoHo' }}><b className='#00695c teal-text text-darken-3'>REGISTER</b></h4><br />
             <NotificationContainer />
             <form onSubmit={registerUser}>
                 <input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />

@@ -44,8 +44,8 @@ function UserProfile() {
 
     const handleFollow = async (id) => {
         const resp = await axios.put(`/private/follow/${id}`)
-        getUser()
         setFollowers(resp.data.userProfile.followers.length)
+        getUser()
         if(resp.data.success){
             NotificationManager.success(resp.data.message, '', 1000);
         } else{
@@ -55,8 +55,8 @@ function UserProfile() {
 
     const handleUnfollow = async (id) => {
         const resp = await axios.put(`/private/unfollow/${id}`)
-        getUser()
         setFollowers(resp.data.userProfile.followers.length)
+        getUser()
         if(resp.data.success){
             NotificationManager.error(resp.data.message, '', 1000);
         } else{
@@ -68,14 +68,14 @@ function UserProfile() {
         <div className="container center">
             <br /><br /><br /><br />
             <NotificationContainer />
-            <img src={userProfile.url} style={{ borderRadius: '50%' }} height='200px' width="200px" alt="Image Faild to Load" /><br /><br />
-            <div className="center" style={{ fontSize: '16px' }}>
-                <b style={{ fontFamily: 'Roboto Slab' }}>Username :</b> {username} <br />
-                <b style={{ fontFamily: 'Roboto Slab' }}>Email ID :</b> {email} <br /><br />
-                <b style={{ fontFamily: 'Roboto Slab' }}>Followers :</b> {followers} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b style={{ fontFamily: 'Roboto Slab' }}>Following :</b> {following} <br />
+            <img src={userProfile.url} style={{ borderRadius: '50%' }} height='270px' width="270px" alt="Image Faild to Load" /><br /><br /><br />
+            <div className="center" style={{ fontSize: '18px' }}>
+                <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Username : </b> <span style={{ fontFamily: 'Farro' }}>{username}</span> <br />
+                <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Email ID : </b> <span style={{ fontFamily: 'Farro' }}>{email}</span><br />
+                <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Followers : </b> <span style={{ fontFamily: 'Farro' }}>{followers}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px'  }}>Following : </b> <span style={{ fontFamily: 'Farro' }}>{following}</span><br />
             </div> <br /><br />
             <div>
-                { user.email !== email && (user.following.includes(userProfile._id) ? <button onClick={() => handleUnfollow(userProfile._id)} className="btn #29b6f6 red">Unfollow</button> : <button onClick={() => handleFollow(userProfile._id)} className="btn #29b6f6 light-blue lighten-1">Follow</button>) }
+                { user.email !== email && (user.following.includes(userProfile._id) ? <button onClick={() => handleUnfollow(userProfile._id)} className="btn #00695c teal darken-3" style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'Recursive' }}>Following</button> : <button onClick={() => handleFollow(userProfile._id)} className="btn #29b6f6 light-blue lighten-1" style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'Recursive' }}>Follow</button>) }
             </div><br /><br />
             <div>
             </div>

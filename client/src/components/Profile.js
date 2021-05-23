@@ -61,30 +61,30 @@ function Profile() {
         <br /><br /><br />
             <NotificationContainer />
     
-            <img src={url} style={{ borderRadius: '50%' }} height='100px' width="100px" alt="Image Faild to Load" />
-            <div className="center" style={{ fontSize: '16px' }}>
-                <b style={{ fontFamily: 'Roboto Slab' }}>Username :</b> {user.username} <br />
-                <b style={{ fontFamily: 'Roboto Slab' }}>Email ID :</b> {user.email}<br />
-                <b style={{ fontFamily: 'Roboto Slab' }}>Followers :</b> {user.followers.length} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b style={{ fontFamily: 'Roboto Slab' }}>Following :</b> {user.following.length}<br />
+            <img src={url} style={{ borderRadius: '50%', marginTop: '-40px' }} height='135px' width="135px" alt="Image Faild to Load" />
+            <div className="center" style={{ fontSize: '18px' }}>
+                <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Username : </b> <span style={{ fontFamily: 'Farro' }}>{user.username}</span> <br />
+                <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Email ID : </b> <span style={{ fontFamily: 'Farro' }}>{user.email}</span><br />
+                <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Followers : </b> <span style={{ fontFamily: 'Farro' }}>{user.followers.length}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px'  }}>Following : </b> <span style={{ fontFamily: 'Farro' }}>{user.following.length}</span><br />
             </div>
             <br />
             <div>
                 <form onSubmit={handleUpload}>
-                    <input type="file" className="btn" onChange={handleChange} /><br /><br />
+                    <input type="file" className="btn #009688 teal" onChange={handleChange} /><br /><br />
                     <button className="btn red" disabled={!file}>Upload</button><br />
                     {uploading}
                 </form>
             </div>
             <br />
             <div>
-                <h5 style={{ fontFamily: 'KoHo', fontWeight: 'bold', fontSize: '25px' }}>Update Profile</h5><br />
+                <h5 style={{ fontFamily: 'KoHo', fontWeight: 'bold', fontSize: '25px' }}>Update Profile</h5>
                 <form>
                     <input type="text" placeholder="Username" value={username} onChange={(e) => {setUsername(e.target.value)}} />
                     <input type="text" placeholder="Email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
                     <input type="password" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
                     <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} /><br />
                 </form>
-                <button onClick={() => updateData(user._id)} className="btn blue">Update</button>
+                <button onClick={() => updateData(user._id)} className="btn #4a148c purple darken-4">Update</button>
             </div>
         </div>
     )
