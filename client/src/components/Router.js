@@ -14,6 +14,8 @@ import ProfileView from './ProfileView'
 import AllUser from './AllUsers'
 import AuthContext from '../context/AuthContext'
 import ForgotPassword from './ForgotPassword'
+import ResetPassword from './ResetPassword'
+import PageNotFound from './PageNotFound'
 
 const Router = () => {
 
@@ -24,12 +26,17 @@ const Router = () => {
             <Navbar />
             <Switch>
                 {   loggedIn === false &&
-                    <>
+                    <>  
+                        <Route exact path='/' component={Login}></Route>
                         <Route path='/register' component={Register}></Route>
                         <Route path='/login' component={Login}></Route>
                         <Route path='/forgotpassword' component={ForgotPassword}></Route>
+                        <Route exact path='/auth/resetpassword/:resetToken' component={ResetPassword} /> 
                     </>
                 }
+
+                { loggedIn === false && <Route path="" component={PageNotFound} /> }
+               
                 { loggedIn === true && <Route exact path='/' component={Home} /> }
                 { loggedIn === true && <Route exact path='/addpost' component={AddPost} /> }
                 { loggedIn === true && <Route exact path='/profile' component={Profile} /> }
@@ -39,7 +46,8 @@ const Router = () => {
                 { loggedIn === true && <Route exact path='/userprofile' component={UserProfile} /> }
                 { loggedIn === true && <Route exact path='/profileview' component={ProfileView} /> }
                 { loggedIn === true && <Route exact path='/allusers' component={AllUser} /> }
-                { loggedIn === true ? <Redirect to='/' /> : <Redirect to='/login' /> }
+                
+                { loggedIn === true && (loggedIn === true ? <Redirect to='/' /> : <Redirect to='/login' />) }
                 
             </Switch>
         </BrowserRouter>
