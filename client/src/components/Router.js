@@ -13,6 +13,7 @@ import UserProfile from './UserProfile'
 import ProfileView from './ProfileView'
 import AllUser from './AllUsers'
 import AuthContext from '../context/AuthContext'
+import ForgotPassword from './ForgotPassword'
 
 const Router = () => {
 
@@ -26,6 +27,7 @@ const Router = () => {
                     <>
                         <Route path='/register' component={Register}></Route>
                         <Route path='/login' component={Login}></Route>
+                        <Route path='/forgotpassword' component={ForgotPassword}></Route>
                     </>
                 }
                 { loggedIn === true && <Route exact path='/' component={Home} /> }

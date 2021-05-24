@@ -15,6 +15,8 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    resetPasswordToken: String,
+    resetPasswordExpire: Date,
     url: {
         type: String,
         default: process.env.DEFAULT_PROFILE_IMAGE

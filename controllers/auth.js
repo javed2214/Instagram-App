@@ -1,6 +1,8 @@
 const User = require('../models/UserModel')
 const Joi = require('@hapi/joi')
 const jwt = require('jsonwebtoken')
+const crypto = require('crypto')
+const { sendEmail } = require('../utils/sendEmail')
 
 const validateRegisterUser = (user) => {
     const JoiSchema = Joi.object({
@@ -103,6 +105,79 @@ exports.getUser = async (req, res) => {
         res.status(200).json({
             success: true,
             user
+        })
+    } catch(err){
+        res.status(500).json({
+            success: false,
+            error: 'Internal Server Error'
+        })
+    }
+}
+
+exports.forgotPassword = async (req, res) => {
+    const resetToken = crypto.randomBytes(30).toString('hex')
+    const hash = crypto.createHash('sha256').update(resetToken).digest('hex')
+
+    const { email } = req.body
+
+    if(!email) return res.json({ error: 'Please provide an Email ID' })
+
+    var user = await User.findOne({ email })
+
+    if(!user) return res.json({ error: 'Invalid Email ID' })
+
+    user = await User.findByIdAndUpdate(user.id, {
+        resetPasswordToken: hash,
+        resetPasswordExpire: new Date().setHours(new Date().getHours() + 1)
+    })
+
+    const resetURL = `${req.protocol}://${req.get('host')}/auth/resetpassword/${hash}`;
+
+    const message = `
+        You requested to reset the Password. <br />
+        Please click on the link below to reset your Password. <br /><br />
+        <b>Password Reset URL</b> <br/> <a href="${resetURL}" target="_blank" >${resetURL}</a><br /><br />
+        Thanks! <br /><br /><br />
+        Regards<br />
+        Instagram 2.0
+    `
+    try{
+        sendEmail(email, 'Reset Instagram 2.0 Password', message)
+        res.json({
+            success: true,
+            message: 'Email Sent'
+        })
+    } catch(err){
+        res.status(500).json({
+            success: false,
+            error: 'Internal Server Error'
+        })
+    }
+}
+
+exports.resetPassword = async (req, res) => {
+    try{
+        const resetPasswordToken = req.body.resetToken
+        
+        const user = await User.findOne({
+            resetPasswordToken,
+            resetPasswordExpire: { $gt: Date.now() }
+        })
+
+        if(!user) return res.state(401).json({ error: 'Inavlid User!' })
+
+        const newPassword = req.body
+
+        user.password = newPassword
+
+        user.resetPasswordToken = undefined
+        user.resetPasswordExpire = undefined
+
+        await user.save()
+
+        res.json({
+            success: true,
+            message: 'Password Reset Successfull'
         })
     } catch(err){
         res.status(500).json({

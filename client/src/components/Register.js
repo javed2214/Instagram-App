@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import './Home.css'
@@ -48,7 +49,8 @@ function Register() {
                 <input type={hidden ? "password" : "text"} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <input type={hidden ? "password" : "text"} placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} /><i onClick={togglePassword} style={{ top: '36.5%', right: '15%', cursor: 'pointer' }} className="material-icons">remove_red_eye</i><br /><br />
                 <button type="submit" className="btn blue waves-effect waves-light">Register</button>
-            </form>
+            </form><br /><br />
+                <Link to='/forgotpassword' style={{ color: 'red' }}>Forgot Password?</Link>
             <Footer />
         </div>
     )

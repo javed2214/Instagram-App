@@ -1,6 +1,7 @@
  import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import AuthContext from '../context/AuthContext';
@@ -51,7 +52,8 @@ function Login() {
                         <button type="submit" className="btn blue waves-effect waves-light">Login</button>
                     </>
                 }
-            </form>
+            </form> <br /><br />
+            <Link to='/forgotpassword' style={{ color: 'red' }}>Forgot Password?</Link>
             <Footer />
         </div>
     )

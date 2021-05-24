@@ -229,7 +229,6 @@ exports.uploadProfile = async (req, res) => {
 exports.uploadImage = async (req, res) => {
     const url = req.body.url
     const id = req.body.id
-    console.log(url)
     try{
         const post = await Post.findOneAndUpdate({ _id: id }, { url: url }, { new: true })
         res.json({
