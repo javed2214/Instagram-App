@@ -33,7 +33,7 @@ const ResetPassword = ({ history, match }) => {
             <form onSubmit={handleSubmit}>
                 <input type="password" placeholder="New Password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
                 <input type="password" placeholder="Confirm New Password" value={confirmNewPassword} onChange={(e) => setConfirmNewPassword(e.target.value)} /><br /><br />
-                <button className="btn #00695c teal darken-3" type="submit">Reset Password</button>
+                <button className="btn waves-effect waves-light #00695c teal darken-3" type="submit">Reset Password</button>
             </form> <br />
             <span style={{ color: 'red' }}>{message}</span>
         </div>

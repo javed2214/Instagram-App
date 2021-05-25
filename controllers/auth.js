@@ -150,7 +150,8 @@ exports.forgotPassword = async (req, res) => {
             <b>NOTE: </b>The Link is Valid for 10 mins.<br /><br />
             Thanks! <br /><br /><br />
             Regards<br />
-            Instagram 2.0
+            Instagram 2.0<br /><br />
+            <img src="https://firebasestorage.googleapis.com/v0/b/blog-app-8547b.appspot.com/o/insta2.0.png?alt=media&token=724b90a0-4276-4674-8a2e-31b447bf8b4c">
         `
 
         sendEmail(email, 'Reset Instagram 2.0 Password', message)
@@ -183,7 +184,7 @@ exports.resetPassword = async (req, res) => {
             resetPasswordExpire: { $gt: Date.now() }
         })
         
-        if(!user) return res.json({ error: 'Inavlid User!' })
+        if(!user) return res.json({ error: 'Token is Invalid or has Expired!' })
         
         user.password = newPassword
 

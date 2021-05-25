@@ -65,9 +65,9 @@ const EditPost = () => {
                 <NotificationContainer />
                 <input type="text" placeholder="Title" value={ title } onChange={(e) => setTitle(e.target.value)} /><br /><br />
                 <textarea cols="30" rows="10" style={{ height: '320px', padding: '5px' }} placeholder="Content" value={ content } onChange={(e) => setContent(e.target.value)}></textarea><br /><br />
-                <input type="file" className="btn" onChange={handleChange} /><br /><br />
+                <input type="file" className="btn waves-effect waves-light" onChange={handleChange} /><br /><br />
             </form>
-            <button disabled={!file} onClick={() => updatePost(location.state.post._id)} className="btn">Update Post</button>
+            <button disabled={!file} onClick={() => updatePost(location.state.post._id)} className="btn waves-effect waves-light">Update Post</button>
         </div>
     )
 }

@@ -73,7 +73,7 @@ function Profile() {
             <br />
             <div>
                 <form onSubmit={handleUpload}>
-                    <input type="file" className="btn #009688 teal waves-effect waves-light" onChange={handleChange} /><br /><br />
+                    <input type="file" className="btn waves-effect waves-light #009688 teal waves-effect waves-light" onChange={handleChange} /><br /><br />
                     <button className="btn red waves-effect waves-light" disabled={!file}>Upload</button><br />
                     {uploading}
                 </form>

@@ -30,7 +30,7 @@ const ForgotPassword = () => {
             <form onSubmit={handleSubmit}>
                 <h6 style={{ fontFamily: 'KoHo', fontSize: '18px' }}>Please Enter your Registered Email ID</h6><br />
                 <input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} /> <br /><br />
-                <button type="submit" className="btn #00695c teal darken-3">Submit</button>
+                <button type="submit" className="btn waves-effect waves-light #00695c teal darken-3">Submit</button>
             </form><br />
             <span style={{ color: 'red' }}>{message}</span>
         </div>
