@@ -79,10 +79,10 @@ exports.getAllPosts = async (req, res) => {
 }
 
 exports.getUserPost = async (req, res) => {
-    const user = req.user
+    const user = req.body.user
     if(!user) return res.json({ error: 'Unauthorized Access' })
     try{
-        const posts = await Post.find({ user }).populate('user', 'username email')
+        const posts = await Post.find({ user }).populate('user', 'username email url followers following')
         res.status(200).json({
             success: true,
             posts
@@ -171,7 +171,7 @@ exports.getFavourites = async (req, res) => {
     const user = req.user
     const id = user._id
     try{
-        const posts = await  Post.find( { 'favourites': mongoose.Types.ObjectId(id) } ).populate('user', 'username email')
+        const posts = await  Post.find( { 'favourites': mongoose.Types.ObjectId(id) } ).populate('user', 'username email url followers following')
         res.status(200).json({
             success: true,
             posts

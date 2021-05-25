@@ -52,7 +52,10 @@ function Profile() {
             setFile(null);
             setURL(url);
             axios.put('/private/uploadprofile', { url })
-            setUploading('')
+            setUploading('Image Uploaded')
+            setTimeout(() => {
+                setUploading('')
+            }, 2000)
         })
     })}
 

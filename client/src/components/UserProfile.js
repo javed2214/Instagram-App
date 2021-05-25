@@ -4,6 +4,8 @@ import AuthContext from '../context/AuthContext';
 import axios from 'axios'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
+import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router'
 
 function UserProfile() {
 
@@ -15,6 +17,7 @@ function UserProfile() {
     const [followers, setFollowers] = useState('')
     const [following, setFollowing] = useState('')
     const location = useLocation();
+    const history = useHistory('')
 
     useEffect(() => {
         setUserProfile(location.state.user.user)
@@ -64,6 +67,13 @@ function UserProfile() {
         }
     }
 
+    const userPosts = (data) => {
+        history.push({
+            pathname: '/myposts',
+            state: { user: data }
+        })
+    }
+
     return(
         <div className="container center">
             <br /><br /><br /><br />
@@ -76,8 +86,9 @@ function UserProfile() {
             </div> <br /><br />
             <div>
                 { user.email !== email && (user.following.includes(userProfile._id) ? <button onClick={() => handleUnfollow(userProfile._id)} className="btn #00695c teal darken-3" style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'Recursive' }}>Following</button> : <button onClick={() => handleFollow(userProfile._id)} className="btn #29b6f6 light-blue lighten-1" style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'Recursive' }}>Follow</button>) }
-            </div><br /><br />
-            <div>
+            </div>
+            <div><br /><br />
+                <span style={{ cursor: 'pointer', color: 'blue', fontWeight: 'bold', fontFamily: 'KoHo', fontSize: '20px' }} onClick={() => userPosts(userProfile)}>POSTS</span>
             </div>
         </div>
     )
