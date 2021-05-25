@@ -1,10 +1,11 @@
- import axios from 'axios'
+import axios from 'axios'
 import React, { useEffect, useContext, useState } from 'react'
 import AuthContext from '../context/AuthContext'
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import './Home.css'
 import { storage } from "./firebase";
+import { Link, Redirect } from 'react-router-dom'
 
 function Profile() {
 
@@ -17,23 +18,10 @@ function Profile() {
 
     const [file, setFile] = useState(null);
     const [url, setURL] = useState(user.url);
-
+    
     useEffect(() => {
-        getUser()
+        
     }, [])
-
-    const updateData = async (id) => {
-        const user = {
-            username, email, password, confirmPassword
-        }
-        const resp = await axios.put(`/private/updateprofile/${id}`, user)
-        if(resp.data.success){
-            NotificationManager.success('Profile Updated Successfully', '', 1200);
-        } else{
-            NotificationManager.error(resp.data.error, '', 1200);
-        }
-        getUser()
-    }
 
     function handleChange(e) {
         setFile(e.target.files[0]);
@@ -64,7 +52,7 @@ function Profile() {
         <br /><br /><br />
             <NotificationContainer />
     
-            <img src={url} style={{ borderRadius: '50%', marginTop: '-40px' }} height='135px' width="135px" alt="Image Faild to Load" />
+            <img src={url} style={{ borderRadius: '50%', marginTop: '-10px' }} height='235px' width="235px" alt="Image Faild to Load" /><br /><br />
             <div className="center" style={{ fontSize: '18px' }}>
                 <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Username : </b> <span style={{ fontFamily: 'Farro' }}>{user.username}</span> <br />
                 <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Email ID : </b> <span style={{ fontFamily: 'Farro' }}>{user.email}</span><br />
@@ -74,20 +62,13 @@ function Profile() {
             <div>
                 <form onSubmit={handleUpload}>
                     <input type="file" className="btn waves-effect waves-light #009688 teal waves-effect waves-light" onChange={handleChange} /><br /><br />
-                    <button className="btn red waves-effect waves-light" disabled={!file}>Upload</button><br />
+                    <button className="btn red waves-effect waves-light" disabled={!file}>Upload</button><br /><br />
                     {uploading}
                 </form>
             </div>
             <br />
-            <div>
-                <h5 style={{ fontFamily: 'KoHo', fontWeight: 'bold', fontSize: '25px' }}>Update Profile</h5>
-                <form>
-                    <input type="text" placeholder="Username" value={username} onChange={(e) => {setUsername(e.target.value)}} />
-                    <input type="text" placeholder="Email" value={email} onChange={(e) => {setEmail(e.target.value)}} />
-                    <input type="password" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} />
-                    <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => {setConfirmPassword(e.target.value)}} /><br />
-                </form>
-                <button onClick={() => updateData(user._id)} className="btn waves-effect waves-light #4a148c purple darken-4">Update</button>
+            <div><br />
+               <Link to='/profileupdate'><i class="material-icons" style={{ verticalAlign: '-6px', fontSize: '28px' }}>settings</i><span style={{ fontSize: '17px' }}> Settings</span></Link>
             </div>
         </div>
     )

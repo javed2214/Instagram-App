@@ -15,6 +15,7 @@ import AllUser from './AllUsers'
 import AuthContext from '../context/AuthContext'
 import ForgotPassword from './ForgotPassword'
 import ResetPassword from './ResetPassword'
+import ProfileUpdate from './ProfileUpdate'
 import PageNotFound from './PageNotFound'
 
 const Router = () => {
@@ -45,6 +46,7 @@ const Router = () => {
                 { loggedIn === true && <Route exact path='/editpost' component={EditPost} /> }
                 { loggedIn === true && <Route exact path='/userprofile' component={UserProfile} /> }
                 { loggedIn === true && <Route exact path='/profileview' component={ProfileView} /> }
+                { loggedIn === true && <Route exact path='/profileupdate' component={ProfileUpdate} /> }
                 { loggedIn === true && <Route exact path='/allusers' component={AllUser} /> }
                 
                 { loggedIn === true && (loggedIn === true ? <Redirect to='/' /> : <Redirect to='/login' />) }
