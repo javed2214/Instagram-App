@@ -6,8 +6,8 @@ const bcrypt = require('bcryptjs')
 
 const validateRegisterUser = (user) => {
     const JoiSchema = Joi.object({
-        username: Joi.string().min(4).max(40).required(),
-        email: Joi.string().min(10).max(100).required().email(),
+        username: Joi.string().min(4).max(10).required(),
+        email: Joi.string().min(10).max(30).required().email(),
         password: Joi.string().min(6).max(100).required()
     })
     return JoiSchema.validate(user)
@@ -15,8 +15,8 @@ const validateRegisterUser = (user) => {
 
 const validatePost = (user) => {
     const JoiSchema = Joi.object({
-        title: Joi.string().min(6).max(200).required(),
-        content: Joi.string().min(20).max(4000).required()
+        title: Joi.string().min(6).max(100).required(),
+        content: Joi.string().min(20).max(500).required()
     })
     return JoiSchema.validate(user)
 }

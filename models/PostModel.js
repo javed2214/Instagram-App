@@ -3,11 +3,17 @@ const mongoose = require('mongoose')
 const PostSchema = new mongoose.Schema({
     title: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        minlength: 6,
+        maxlength: 100
     },
     content: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
+        minlength: 20,
+        maxlength: 500
     },
     likes: [{
         type: mongoose.Schema.Types.ObjectId,

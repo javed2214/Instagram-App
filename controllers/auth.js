@@ -6,8 +6,8 @@ const { sendEmail } = require('../utils/sendEmail')
 
 const validateRegisterUser = (user) => {
     const JoiSchema = Joi.object({
-        username: Joi.string().min(4).max(40).required(),
-        email: Joi.string().min(10).max(100).required().email(),
+        username: Joi.string().min(4).max(10).required(),
+        email: Joi.string().min(10).max(30).required().email(),
         password: Joi.string().min(6).max(100).required()
     })
     return JoiSchema.validate(user)
