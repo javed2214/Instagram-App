@@ -5,4 +5,4 @@ Live URL: https://insta4122.herokuapp.com
 
 <!-- ![ScreenShot](https://raw.github.com/javed2214/Instagram-App/master/screenshots/ss-1.jpg) -->
 
-<img src="https://raw.githubusercontent.com/javed2214/Instagram-App/master/screenshots/ss-1.jpg" width="200" height="300">
+<img src="https://raw.githubusercontent.com/javed2214/Instagram-App/master/screenshots/ss-1.jpg" width="300" height="420">
