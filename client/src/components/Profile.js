@@ -6,6 +6,7 @@ import 'react-notifications/lib/notifications.css';
 import './Home.css'
 import { storage } from "./firebase";
 import { Link, Redirect } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 function Profile() {
 
@@ -15,12 +16,18 @@ function Profile() {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [uploading, setUploading] = useState('')
+    const history = useHistory()
 
     const [file, setFile] = useState(null);
     const [url, setURL] = useState(user.url);
     
     useEffect(() => {
-        
+        try{
+            getUser()
+            console.log(user)
+        } catch(err){
+            history.push('/')
+        }
     }, [])
 
     function handleChange(e) {
@@ -52,11 +59,11 @@ function Profile() {
         <br /><br /><br />
             <NotificationContainer />
     
-            <img src={url} style={{ borderRadius: '50%', marginTop: '-10px' }} height='235px' width="235px" alt="Image Faild to Load" /><br /><br />
+            <img src={user.url} style={{ borderRadius: '50%', marginTop: '-10px' }} height='235px' width="235px" alt="Image Faild to Load" /><br /><br />
             <div className="center" style={{ fontSize: '18px' }}>
                 <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Username : </b> <span style={{ fontFamily: 'Farro' }}>{user.username}</span> <br />
                 <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Email ID : </b> <span style={{ fontFamily: 'Farro' }}>{user.email}</span><br />
-                <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Followers : </b> <span style={{ fontFamily: 'Farro' }}>{user.followers.length}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px'  }}>Following : </b> <span style={{ fontFamily: 'Farro' }}>{user.following.length}</span><br />
+                { user.followers && <><b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px' }}>Followers : </b> <span style={{ fontFamily: 'Farro' }}>{user.followers.length}</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b className="#bf360c deep-orange-text text-darken-4" style={{ fontFamily: 'KoHo', fontSize: '20px'  }}>Following : </b> <span style={{ fontFamily: 'Farro' }}>{user.following.length}</span><br /></>}
             </div>
             <br />
             <div>
@@ -68,7 +75,7 @@ function Profile() {
             </div>
             <br />
             <div><br />
-               <Link to='/profileupdate'><i class="material-icons" style={{ verticalAlign: '-6px', fontSize: '28px' }}>settings</i><span style={{ fontSize: '17px' }}> Settings</span></Link>
+               <Link to='/profileupdate'><i className="material-icons" style={{ verticalAlign: '-6px', fontSize: '28px' }}>settings</i><span style={{ fontSize: '17px' }}> Settings</span></Link>
             </div>
         </div>
     )

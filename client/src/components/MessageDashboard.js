@@ -4,6 +4,7 @@ import { db } from './firebase'
 import Message from './Message'
 import firebase from 'firebase'
 import './Home.css'
+import { useHistory } from 'react-router-dom'
 
 const MessageDashboard = () => {
 
@@ -11,10 +12,19 @@ const MessageDashboard = () => {
     const [msg, setMsg] = useState('')
     const [messages, setMessages] = useState('')
     const [message, setMessage] = useState('')
+    const history = useHistory()
 
     useEffect(() => {
-        getUser()
-        getMessages()
+        try{
+            if(toUser === null || toUser === undefined || user === null || user === undefined || !toUser || !user){
+                console.log('ERROR OCCURRED')
+                history.push('/')
+            }
+            getUser()
+            getMessages()
+        } catch(err){
+            history.push('/')
+        }
     }, [])
 
     const handleSubmit = (e) => {
