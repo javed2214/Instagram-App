@@ -21,13 +21,9 @@ function Profile() {
     const [file, setFile] = useState(null);
     const [url, setURL] = useState(user.url);
     
+    
     useEffect(() => {
-        try{
-            getUser()
-            console.log(user)
-        } catch(err){
-            history.push('/')
-        }
+
     }, [])
 
     function handleChange(e) {
@@ -51,8 +47,10 @@ function Profile() {
             setTimeout(() => {
                 setUploading('')
             }, 2000)
+            window.location.reload(); 
         })
-    })}
+    })
+}
 
     return (
         <div className="container center">
