@@ -8,6 +8,7 @@ const AuthContextProvider = (props) => {
 
     const [loggedIn, setLoggedIn] = useState(undefined)
     const [user, setUser] = useState('')
+    const [toUser, setToUser] = useState('')
 
     const getLoggedIn = async () => {
         const resp = await axios.post('/auth/loggedin')
@@ -19,13 +20,17 @@ const AuthContextProvider = (props) => {
         setUser(resp.data.user)
     }
 
+    const getToUser = (x) => {
+        setToUser(x)
+    }
+
     useEffect(() => {
         getLoggedIn()
         getUser()
     }, [])
 
     return(
-        <AuthContext.Provider value={{ loggedIn, getLoggedIn, getUser, user }}>
+        <AuthContext.Provider value={{ loggedIn, getLoggedIn, getUser, user, getToUser, toUser, setToUser }}>
             { props.children }
         </AuthContext.Provider>
     )
