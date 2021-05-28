@@ -93,7 +93,7 @@ function UserProfile() {
                 { user.email !== email && (user.following.includes(userProfile._id) ? <button onClick={() => handleUnfollow(userProfile._id)} className="btn waves-effect waves-light #00695c teal darken-3" style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'Recursive', width: '145px' }}>Following</button> : <button onClick={() => handleFollow(userProfile._id)} className="btn waves-effect waves-light #29b6f6 light-blue lighten-1" style={{ fontSize: '20px', fontWeight: 'bold', fontFamily: 'Recursive', width: '145px' }}>Follow</button>) }
             </div>
             <div><br /><br />
-                <span style={{ cursor: 'pointer', color: 'orchid'}} onClick={() => getMessages(userProfile)}><i style={{ margin: 'auto 60px', fontSize: '45px' }} className="medium material-icons">chat</i></span>
+                { user.email !== userProfile.email ? <span style={{ cursor: 'pointer', color: 'orchid'}} onClick={() => getMessages(userProfile)}><i style={{ margin: 'auto 60px', fontSize: '45px' }} className="medium material-icons">chat</i></span> : <span style={{ cursor: 'pointer', color: 'grey'}}><i style={{ margin: 'auto 60px', fontSize: '45px' }} className="disabled medium material-icons">chat</i></span>}
                 <span style={{ cursor: 'pointer', color: 'orchid'}} onClick={() => userPosts(userProfile)}><i style={{ margin: 'auto 60px', fontSize: '45px' }} className="medium material-icons">assignment</i></span>
             </div>
         </div>
