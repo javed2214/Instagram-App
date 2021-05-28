@@ -17,7 +17,6 @@ const MessageDashboard = () => {
     useEffect(() => {
         try{
             if(toUser === null || toUser === undefined || user === null || user === undefined || !toUser || !user){
-                console.log('ERROR OCCURRED')
                 history.push('/')
             }
             getUser()
