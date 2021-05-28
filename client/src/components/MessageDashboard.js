@@ -3,6 +3,7 @@ import AuthContext from '../context/AuthContext'
 import { db } from './firebase'
 import Message from './Message'
 import firebase from 'firebase'
+import './Home.css'
 
 const MessageDashboard = () => {
 
@@ -10,7 +11,6 @@ const MessageDashboard = () => {
     const [msg, setMsg] = useState('')
     const [messages, setMessages] = useState('')
     const [message, setMessage] = useState('')
-    const [userid, setUserid] = useState('zzz')
 
     useEffect(() => {
         getUser()
@@ -19,6 +19,10 @@ const MessageDashboard = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if(message.length == 0){
+            alert('Message Cannot be Empty')
+            return
+        }
         db.collection(user._id > toUser._id ? user._id + toUser._id : toUser._id + user._id).add({
             id: user._id > toUser._id ? user._id + toUser._id : toUser._id + user._id,
             message: message,
@@ -34,7 +38,6 @@ const MessageDashboard = () => {
     }
 
     const getMessages = () => {
-        console.log(userid)
         db.collection(user._id > toUser._id ? user._id + toUser._id : toUser._id + user._id).orderBy('timestamp').onSnapshot(function(querySnapshot){
             setMessages(querySnapshot.docs.map((doc) => ({
                 uid: doc.id,
@@ -48,19 +51,23 @@ const MessageDashboard = () => {
 
     return(
         <div className="container">
-            <h4>Messages</h4>
+            <div><br />
+                <img src={toUser.url} alt="" height="45px" width="45px" style={{ borderRadius: '50%', marginTop: '-5px' }} /> <span style={{ verticalAlign: '20px', marginLeft: '5px', fontFamily: 'KoHo', fontSize: '19px' }}>{toUser.username}</span>
+            </div>
+            <br />
+            <div style={{ height: '450px', overflowY: 'scroll', border: '1px solid black', padding: '6px' }}>
+            
+                {
+                    messages.length > 0 ? messages.map((msg) => {
+                        return(
+                            <Message key={msg.uid} msg={msg} />
+                        )
+                    }) : <h5 style={{ fontFamily: 'KoHo' }} className="center">No Chats Available 😅</h5>
+                }
+            </div>
             <form onSubmit={handleSubmit}>
                 <input type="text" placeholder="Enter your Message" value={message} onChange={(e) => setMessage(e.target.value)} />
             </form>
-            {msg}
-            <br /><br /><br />
-            {
-                messages.length > 0 ? messages.map((msg) => {
-                    return(
-                        <Message key={msg.uid} msg={msg} />
-                    )
-                }) : <h6>No Messages</h6>
-            }
         </div>
     )
 }
