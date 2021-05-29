@@ -22,11 +22,11 @@ function Message({msg}) {
         <>
             {
                 toUser.username !== msg.to ? (
-                    <div ref={messagesEndRef} className="#1e88e5 blue darken-1" style={{ float: 'left', color: 'white', width: '60%', margin: '8px auto', background: 'pink', borderRadius: '10px', padding: '10px' }}>
+                    <div ref={messagesEndRef} style={{ float: 'left', color: 'white', width: '60%', margin: '8px auto', background: 'SlateBlue', borderRadius: '10px', padding: '10px' }}>
                         {msg.message}
                     </div>
                 ) : (
-                    <div ref={messagesEndRef} className="#00695c teal darken-3" style={{ float: 'right', color: 'white', width: '60%', margin: '8px auto', background: 'yellow', borderRadius: '10px', padding: '10px' }}>
+                    <div ref={messagesEndRef} style={{ float: 'right', color: 'white', width: '60%', margin: '8px auto', background: '#2a6e49', borderRadius: '10px', padding: '10px' }}>
                         {msg.message}
                     </div>
                 )

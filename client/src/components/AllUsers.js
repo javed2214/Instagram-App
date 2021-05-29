@@ -66,10 +66,10 @@ const AllUser = () => {
                     { loading ? <center><br /><br /><Loader type='spokes' color= 'red' height= '20%' width= '20%' /></center> :  users.map((userProfile) => {
                         return(
                                 <tr key={userProfile._id}>
-                                <td><span onClick={() => getUserProfile(userProfile)}><img src={userProfile.url} height="70px" width="70px" style={{ borderRadius: '50%', cursor: 'pointer', float: 'left' }} />&nbsp;&nbsp;&nbsp;&nbsp;<span className="#263238 blue-grey-text text-darken-4" style={{ verticalAlign: '10px', fontSize: '18px', fontWeight: 'bold', fontFamily: 'KoHo', cursor: 'pointer', float: 'left', marginLeft: '12px', marginTop: '20px' }}>{userProfile.username}</span></span></td>
+                                <td><span onClick={() => getUserProfile(userProfile)}><img src={userProfile.url} height="70px" width="70px" style={{ borderRadius: '50%', cursor: 'pointer', float: 'left' }} />{ userProfile.isOnline ? <i style={{ position: 'absolute', left: '19%', fontSize: '15px', color: '#58B61C' }} class="material-icons">brightness_1</i> : <i style={{ position: 'absolute', left: '19%', fontSize: '15px', color: '#D0D0B5' }} class="material-icons">brightness_1</i> }&nbsp;&nbsp;&nbsp;&nbsp;<span className="#263238 blue-grey-text text-darken-4" style={{ verticalAlign: '10px', fontSize: '18px', fontWeight: 'bold', fontFamily: 'KoHo', cursor: 'pointer', float: 'left', marginLeft: '12px', marginTop: '20px' }}>{userProfile.username}</span></span></td>
                                 {/* <td></td> */}
                                 { user.email != userProfile.email ? ( user.following.includes(userProfile._id) ? <td><button onClick={() => handleUnfollow(userProfile._id)} className="btn waves-effect waves-light #c62828  #00695c teal darken-3" style={{ fontSize: '16px', fontFamily: 'Recursive', width: '125px' }}>Following</button></td> : <td><button onClick={() => handleFollow(userProfile._id)} className="btn waves-effect waves-light light-blue lighten-1" style={{ fontSize: '16px', fontFamily: 'Recursive', width: '125px' }}>Follow</button></td> ) : <td><button className="disabled btn waves-effect waves-light #c62828  #00695c teal darken-3" style={{ fontSize: '16px', fontFamily: 'Recursive', width: '125px' }}>Follow</button></td>}
-                            </tr>
+                                </tr>
                         )
                     }) }
                 </tbody>

@@ -40,7 +40,11 @@ const UserSchema = new mongoose.Schema({
     followers: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
-    }]
+    }],
+    isOnline: {
+        type: Boolean,
+        default: false
+    }
 })
 
 UserSchema.pre('save', async function(next){

@@ -61,6 +61,8 @@ exports.login = async (req, res) => {
         const isMatch = await user.comparePassword(password)
         if(!isMatch) return res.json({ error: 'Invalid Credentials' })
         const token = await user.getSignedToken()
+        user.isOnline = true
+        await user.save()
         res.cookie('token', token, {
             httpOnly: true
         }).json({
@@ -75,8 +77,12 @@ exports.login = async (req, res) => {
     }
 }
 
-exports.logout = (req, res) => {
+exports.logout = async (req, res) => {
     try{
+        const user = req.user
+        if(!user) return res.json({ error: 'User is Invalid' })
+        user.isOnline = false
+        await user.save()
         res.cookie('token', '', {
             httpOnly: true,
             expires: new Date(0)
@@ -114,6 +120,7 @@ exports.getUser = async (req, res) => {
             user
         })
     } catch(err){
+        console.log(err)
         res.status(500).json({
             success: false,
             error: 'Internal Server Error'
