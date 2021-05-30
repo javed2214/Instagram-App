@@ -192,6 +192,8 @@ exports.updateProfile = async (req, res) => {
         var password = req.body.password
         var confirmPassword = req.body.confirmPassword
         if(!username || !email || !password || !confirmPassword) return res.json({ error: 'Please fill all the Fields' })
+        var isUser = await User.findOne({ email })
+        if(isUser) return res.json({ error: 'Email is already in Use' })
         if(password !== confirmPassword) return res.json({ error: 'Password didn\'t Match' })
         const { error } = validateRegisterUser({ username, email, password })
         if(error) return res.json({ error: error.details[0].message })
